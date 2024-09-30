@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="body">
+    <header class="header">Registro de atenciones<input style="display:none" id="asignardni"></header>
+    <main class="main">
+        <div class="login" id="login">
+            <p class="acceder">Acceder</p>
+            <div class="box-login">
+                <input type="text" name="dniagent" id="dniagent" placeholder="DNI" class="input">
+                <input type="password" name="password" id="password" placeholder="CONTRASEÑA" class="input">
+                <a class="verify" id="verify">Verificar</a>
+            </div>
+        </div>
+        <div class="load" id="load">Registrando...</div>
+        <div class="load" id="alertred">Verificar por favor...</div>
+        
+        <form class="form" id="rF" name="rF" method="post" autocomplete="on">
+
+            <section class="first-section">
+                <fieldset class="fieldset">
+                    <legend class="legend">Datos Generales</legend>
+                    <input type="text" class="input-text" id="dniuser" placeholder="DNI AGENTE" required name="dniuser">
+                    <select type="list" list="tllamada" class="input-select" id="tipodellamada" name="tipodellamada"
+                        required>
+                        <datalist id="tllamada">
+                            <option selected disabled value="">MODALIDAD</option>
+                            <option value="Presencial">Presencial</option>
+                            <option value="Línea Social Gratuita 101">Línea Social Gratuita 101</option>
+                            <option value="Central Telefónica">Central Telefónica</option>
+                            <option value="Devolución de llamada">Devolución de llamada</option>
+                        </datalist>
+                    </select>
+
+                    <select type="list" list="tverificacion" class="input-select" id="verificacion" name="verificacion"
+                        style="display: none;">
+                        <datalist id="tverificacion">
+                            <option selected disabled value="">VERIFICACIÓN</option>
+                            <option value="Válido" selected>Válido</option>
+                            <option value="No válido">No válido</option>
+                        </datalist>
+                    </select>
+
+                    <select type="list" list="noValidoop" class="input-select redAlert" name="llnovalido"
+                        id="llnovalido" style="display: none;">
+                        <datalist id="noValidoop">
+                            <option selected disabled value="">MOTIVO</option>
+                            <option value="Se corto la llamada">Se corto la llamada</option>
+                            <option value="No se logra escuchar al ciudadano">No se logra escuchar al
+                                ciudadano</option>
+                            <option value="Ciudadano no responde">Ciudadano no responde</option>
+                            <option value="Llamada Malintencionada">Llamada Malintencionada</option>
+                            <option value="Otros">Otros</option>
+                        </datalist>
+                    </select>
+
+                    <select type="list" list="malintencionada" class="input-select redAlert" name="llmalintencionada"
+                        id="malintencionada" style="display: none;">
+                        <datalist id="malintencionada">
+                            <option selected disabled value="">SELECCIONAR</option>
+                            <option value="Siliente">Siliente</option>
+                            <option value="Perturbadora">Perturbadora</option>
+                            <option value="Falsa">Falsa</option>
+                        </datalist>
+                    </select>
+
+                    <select type="list" list="tsedes" class="input-select" name="sedes" id="sedes" style="display: none;">
+                        <datalist id="tsedes">
+                            <option selected disabled value="">SEDES</option>
+                            <option value="Moc San Isidro">Moc San Isidro</option>
+                            <option value="Moc Palacio">Moc Palacio</option>
+                            <option value="Moc VMT">Moc VMT</option>
+                            <option value="Moc SJL">Moc SJL</option>
+                            <option value="Moc Huacho">Moc Huacho</option>
+                            <option value="Mac Lima Norte">Mac Lima Norte</option>
+                            <option value="Mac Lima Sur">Mac Lima Sur</option>
+                            <option value="Mac Junín">Mac Junín</option>
+                            <option value="Moc Pachacutec-Ventanilla">Moc Pachacutec-Ventanilla</option>
+                            <option value="Mac Ventanilla">Mac Ventanilla</option>
+                        </datalist>
+                    </select>
+
+                    <input class="input-text" value="¡Verificar Datos!"
+                        style="display:none; background-color:red;color:#fff;border:1px solid red;text-align:center;"
+                        id="alertGeneral">
+
+                </fieldset>
+            </section>
+
+            <section class="first-section">
+
+                <fieldset class="fieldset">
+                    <legend class="legend">
+                        Datos del Ciudadano
+                    </legend>
+
+                    <div class="atri" place="CELULAR CIUDADANO"><input name="phone" id="phone" type="tel"
+                            placeholder="CELULAR CIUDADANO" required class="input-text">
+                    </div>
+
+                    <div class="atri" place="DNI/CE CIUDADANO">
+                        <input name="nameCall" id="nameCall" type="text" placeholder="DNI/CE CIUDADANO"
+                            class="input-text" required>
+                    </div>
+
+                    <div class="atri" place="NOMBRES COMPLETOS"><input name="name" id="name" type="text"
+                            placeholder="NOMBRES COMPLETOS" class="input-text">
+                    </div>
+
+                    <div class="atri" place="APELLIDO PATERNO"><input name="fullName" id="fullName" type="text"
+                            placeholder="APELLIDO PATERNO" class="input-text">
+                    </div>
+
+                    <div class="atri" place="APELLIDO MATERNO"><input name="fullNameMo" id="fullNameMo" type="text"
+                            placeholder="APELLIDO MATERNO" class="input-text">
+                    </div>
+
+                    <select type="list" list="tlengua" class="input-select sml" name="lengua" id="lengua">
+                        <datalist id="tlengua">
+                            <option selected disabled value="">LENGUA</option>
+                            <option value="Castellano" selected>Castellano</option>
+                            <option value="Quechua">Quechua</option>
+                            <option value="Otros">Otros</option>
+                        </datalist>
+                    </select>
+
+                    <select type="list" list="tgenero" class="input-select sml" name="genero" id="genero">
+                        <datalist id="tgenero">
+                            <option selected disabled value="">GENERO</option>
+                            <option value="Femenino">Femenino</option>
+                            <option value="Masculino">Masculino</option>
+                        </datalist>
+                    </select>
+
+                    <select type="list" list="regiones" class="input-select sml" name="region" id="region">
+                        <datalist id="regiones">
+                            <option selected disabled value="">REGIÓN</option>
+                            <option value="Amazonas">Amazonas</option>
+                            <option value="Ancash">Ancash</option>
+                            <option value="Apurimac">Apurimac</option>
+                            <option value="Arequipa">Arequipa</option>
+                            <option value="Ayacucho">Ayacucho</option>
+                            <option value="Cajamarca">Cajamarca</option>
+                            <option value="Callao">Callao</option>
+                            <option value="Cusco">Cusco</option>
+                            <option value="Huancavelica">Huancavelica</option>
+                            <option value="Huanuco">Huanuco</option>
+                            <option value="Ica">Ica</option>
+                            <option value="Junin">Junin</option>
+                            <option value="La Libertad">La Libertad</option>
+                            <option value="Lambayeque">Lambayeque</option>
+                            <option value="Lima Provincia">Lima Provincia</option>
+                            <option value="Lima Metropolitana">Lima Metropolitana</option>
+                            <option value="Loreto">Loreto</option>
+                            <option value="Madre De Dios">Madre De Dios</option>
+                            <option value="Moquegua">Moquegua</option>
+                            <option value="Pasco">Pasco</option>
+                            <option value="Piura">Piura</option>
+                            <option value="Puno">Puno</option>
+                            <option value="San Martin">San Martin</option>
+                            <option value="Tacna">Tacna</option>
+                            <option value="Tumbes">Tumbes</option>
+                            <option value="Ucayali">Ucayali</option>
+                        </datalist>
+                    </select>
+
+                    <div id="huanuco" style="display: none;">
+                        <select type="list" list="provinciasHuanucolist" class="input-select sml"
+                            placeholder="Seleccionar" name="provinciasHuanuco" id="provinciasHuanuco">
+                            <datalist id="provinciasHuanucolist">
+                                <option selected disabled value="">--Seleccionar--</option>
+                                <option value="Huanuco">Huanuco</option>
+                                <option value="Ambo">Ambo</option>
+                                <option value="Dos de Mayo">Dos de Mayo</option>
+                                <option value="Hacaybamba">Hacaybamba</option>
+                                <option value="Huamalies">Huamalies</option>
+                                <option value="Lencio Prado">Lencio Prado</option>
+                                <option value="Marañon">Marañon</option>
+                                <option value="Pachitea">Pachitea</option>
+                                <option value="Puerto Inca">Puerto Inca</option>
+                                <option value="Lauricocha">Lauricocha</option>
+                                <option value="Yarowilca">Yarowilca</option>
+                            </datalist>
+                        </select>
+                    </div>
+                    <div id="lima" style="display: none;">
+                        <select type="list" list="provinciasLimalist" class="input-select sml" placeholder="Seleccionar"
+                            name="provinciasLima" id="provinciasLima">
+                            <datalist id="provinciasLimalist">
+                                <option selected disabled value="">--Seleccionar--</option>
+                                <option value="Huaura">Huaura</option>
+                                <option value="Barranca">Barranca</option>
+                                <option value="Cajatambo">Cajatambo</option>
+                                <option value="Canta">Canta</option>
+                                <option value="Cañete">Cañete</option>
+                                <option value="Huaral">Huaral</option>
+                                <option value="Huarochirí">Huarochirí</option>
+                                <option value="Oyón">Oyón</option>
+                                <option value="Yauyos">Yauyos</option>
+                            </datalist>
+                        </select>
+                    </div>
+                    <div id="limametro" style="display: none;">
+                        <select type="list" list="metropolitanoLimalist" class="input-select sml"
+                            placeholder="Seleccionar" name="distritosLima" id="metropolitanoLima">
+                            <datalist id="metropolitanoLimalist">
+                                <option selected disabled value="">--Seleccionar--</option>
+                                <option value="Ancón">Ancón</option>
+                                <option value="Ate">Ate</option>
+                                <option value="Barranco">Barranco</option>
+                                <option value="Breña">Breña</option>
+                                <option value="Carabayllo">Carabayllo</option>
+                                <option value="Cercado de Lima">Cercado de Lima</option>
+                                <option value="Chaclacayo">Chaclacayo</option>
+                                <option value="Chorrillos">Chorrillos</option>
+                                <option value="Cieneguilla">Cieneguilla</option>
+                                <option value="Comas">Comas</option>
+                                <option value="El agustino">El agustino</option>
+                                <option value="Independencia">Independencia</option>
+                                <option value="Jesús María">Jesús María</option>
+                                <option value="La Molina">La Molina</option>
+                                <option value="La Victoria">La Victoria</option>
+                                <option value="Lima">Lima</option>
+                                <option value="Lince">Lince</option>
+                                <option value="Los Olivos">Los Olivos</option>
+                                <option value="Lurigancho">Lurigancho</option>
+                                <option value="Lurín">Lurín</option>
+                                <option value="Magdalena del Mar">Magdalena del Mar</option>
+                                <option value="Miraflores">Miraflores</option>
+                                <option value="Pachacámac">Pachacámac</option>
+                                <option value="Pucusana">Pucusana</option>
+                                <option value="Pueblo Libre">Pueblo Libre</option>
+                                <option value="Puente Piedra">Puente Piedra</option>
+                                <option value="Punta Hermosa">Punta Hermosa</option>
+                                <option value="Punta Negra">Punta Negra</option>
+                                <option value="Rímac">Rímac</option>
+                                <option value="San Bartolo">San Bartolo</option>
+                                <option value="San Borja">San Borja</option>
+                                <option value="San Isidro">San Isidro</option>
+                                <option value="San Juan De Lurigancho">San Juan De Lurigancho</option>
+                                <option value="San Juan De Miraflores">San Juan De Miraflores</option>
+                                <option value="San Luis">San Luis</option>
+                                <option value="San Martin De Porres">San Martin De Porres</option>
+                                <option value="San Miguel">San Miguel</option>
+                                <option value="Santa Anita">Santa Anita</option>
+                                <option value="Santa María Del Mar">Santa María Del Mar</option>
+                                <option value="Santa Rosa">Santa Rosa</option>
+                                <option value="Santiago De Surco">Santiago De Surco</option>
+                                <option value="Surquillo">Surquillo</option>
+                                <option value="Villa El Salvador">Villa El Salvador</option>
+                                <option value="Villa Maria Del Triunfo">Villa Maria Del Triunfo</option>
+                            </datalist>
+                        </select>
+                    </div>
+
+
+                </fieldset>
+
+            </section>
+
+            <section class="first-section">
+
+                <fieldset class="fieldset">
+                    <legend class="legend">
+                        Motivo de consulta
+                    </legend>
+                    <select type="list" list="tmotivo" class="input-select" name="motivo" id="motivo">
+                        <datalist id="tmotivo">
+                            <option selected disabled value="">MOTIVO</option>
+                            <option value="Programas Sociales">Programas Sociales</option>
+                            <option value="Clasificación Socioeconómica">Clasificación Socioeconómica
+                            </option>
+                            <option value="Otros">Otros</option>
+                            <option value="No MIDIS">No MIDIS</option>
+                        </datalist>
+                    </select>
+                </fieldset>
+
+                <fieldset class="fieldset" id="ppss" style="display:none ;">
+                    <legend class="legend">
+                        Programas Sociales
+                    </legend>
+                        <select type="list" list="topppss" class="input-select" name="opppss" id="oppsss">
+                            <datalist id="topppss">
+                                <option selected disabled value="">PROGRAMA</option>
+                                <option value="PN. PENSIÓN 65">PN. PENSIÓN 65</option>
+                                <option value="PN. CONTIGO">PN. CONTIGO</option>
+                                <option value="PN. JUNTOS">PN. JUNTOS</option>
+                                <option value="PN. QALIWARMA">PN. QALIWARMA</option>
+                                <option value="PN. CUNA MÁS">PN. CUNA MÁS</option>
+                                <option value="PN. PAÍS">PN. PAÍS</option>
+                                <option value="PN. FONCODES">PN. FONCODES</option>
+                                <option value="Información General">Información General</option>
+                            </datalist>
+                        </select>
+
+                        <input type="list" list="topppssse" placeholder="CONSULTA" class="input-select" name="opppssse"
+                            id="opppssse">
+                        <datalist id="topppssse">
+                            <option value="Requisitos">Requisitos</option>
+                            <option value="Afiliación">Afiliación</option>
+                            <option value="Estado de afiliación">Estado de afiliación</option>
+                            <option value="Cronograma de pago">Cronograma de pago</option>
+                            <option value="Motivo de no abono">Motivo de no abono</option>
+                            <option value="Contactos del programa">Contactos del programa</option>
+                            <option value="Teléfonos del programa no contestan">Teléfonos del programa no
+                                contestan</option>
+                        </datalist>
+                </fieldset>
+
+                <fieldset class="fieldset" id="cse" style="display:none ;">
+                    <legend class="legend">
+                        Clasificación Socioeconómica
+                    </legend>
+                        <select type="list" list="topcse" class="input-select" id="opcse" name="opcse">
+                            <datalist id="topcse">
+                                <option selected disabled value="">CONSULTA</option>
+                                <option value="Requisitos">Requisitos</option>
+                                <option value="Consulta CSE">Consulta CSE</option>
+                                <option value="Consulta Empadronamiento">Consulta Empadronamiento</option>
+                                <option value="Empadronamiento masivo focalizado">Empadronamiento masivo
+                                    focalizado</option>
+                                <option value="Estado de trámite">Estado de trámite</option>
+                                <option value="Actualización de CSE">Actualización de CSE</option>
+                                <option value="Verificación de CSE">Verificación de CSE</option>
+                                <option value="Unidad Local de Empadronamiento (ULE)">Unidad Local de
+                                    Empadronamiento
+                                    (ULE)</option>
+                                <option value="Otros">Otros</option>
+                            </datalist>
+                        </select>
+
+                        <div id="empadronarDificulat" style="display:none;">
+                            <select type="list" list="topcsese" class="input-select" id="opcsese" name="opcsese">
+                                <datalist id="topcsese">
+                                    <option selected disabled value="">DIFICULTAD</option>
+                                    <option value="Empadronador no quiere presentarse">Empadronador no quiere
+                                        presentarse</option>
+                                    <option value="Empadronador no se identifica">Empadronador no se identifica
+                                    </option>
+                                    <option value="Empadronador visita solo un hogar">Empadronador visita solo
+                                        un hogar</option>
+                                    <option value="Empadronador solicita dinero por empadronar">Empadronador
+                                        solicita dinero por empadronar</option>
+                                    <option value="Otros">Otros</option>
+                                </datalist>
+                            </select>
+                        </div>
+
+                        <div id="empadronarOtros" style="display:none;">
+                            <input name="cseot" id="cseot" type="text" placeholder="OTROS" class="input-text">
+                        </div>
+                </fieldset>
+
+                <fieldset class="fieldset" id="otros" style="display:none;">
+                    <legend class="legend">
+                        Otros
+                    </legend>
+                        <select type="list" list="topotros" placeholder="CONSULTA" class="input-select" name="opotros"
+                            id="opotros">
+                            <datalist id="topotros">
+                                <option selected disabled value="">CONSULTA</option>
+                                <option value="Anexos de la central telefónica">Anexos de la central telefónica
+                                </option>
+                                <option value="Atención de denuncia">Atención de denuncia</option>
+                                <option value="Convocatorias">Convocatorias</option>
+                                <option value="Bonos otorgados">Bonos otorgados</option>
+                                <option value="Mensajes fraudulentos sobre bonos">Mensajes fraudulentos sobre
+                                    bonos</option>
+                                <option value="SMS fraudulentos">SMS fraudulentos</option>
+                                <option value="Nuevos Bonos MIDIS">Nuevos Bonos MIDIS</option>
+                                <option value="Bonos no MIDIS">Bonos no MIDIS</option>
+                                <option value="Servicios del MIDIS">Servicios del MIDIS</option>
+                                <option value="Solicita apoyo económico/social">Solicita apoyo económico/social
+                                </option>
+                                <option value="Otros">Otros</option>
+                            </datalist>
+                        </select>
+
+                        <div id="bonustype" style="display:none;">
+                            <select type="list" list="topotrosse" class="input-select" name="opotrosse" id="opotrosse">
+                                <datalist id="topotrosse">
+                                    <option selected disabled value="">BONOS</option>
+                                    <option value="Bono Alimentario">Bono Alimentario</option>
+                                    <option value="Bono Yanapay">Bono Yanapay</option>
+                                    <option value="Bono 600">Bono 600</option>
+                                    <option value="Bono Universal MIDIS">Bono Universal MIDIS</option>
+                                    <option value="BFU - MIDIS">BFU - MIDIS</option>
+                                    <option value="Bono Rural">Bono Rural</option>
+                                    <option value="Bono Yomequedoencasa">Bono Yomequedoencasa</option>
+                                    <option value="Información General">Información General</option>
+                                </datalist>
+                            </select>
+                        </div>
+
+                        <div id="consultbonds" style="display:none;">
+                            <select type="list" list="topotrosseo" class="input-select" name="opotrosseo"
+                                id="opotrosseo">
+                                <datalist id="topotrosseo">
+                                    <option selected disabled value="">CONSULTA BONOS</option>
+                                    <option value="No cobro bono en el plazo indicado">No cobro bono en el plazo
+                                        indicado</option>
+                                    <option value="Cobro su bono BA">Cobro su bono</option>
+                                    <option value="Abono o giro en BN">Abono o giro en BN</option>
+                                    <option value="Fecha de depósito">Fecha de depósito</option>
+                                    <option value="Dificultad con el cobro de su bono">Dificultad con el cobro
+                                        de su bono</option>
+                                    <option value="Consulta por terceros">Consulta por terceros</option>
+                                    <option value="No es beneficiario">No es beneficiario</option>
+                                </datalist>
+                            </select>
+                        </div>
+                </fieldset>
+
+            </section>
+            <section class="first-section">
+
+                <fieldset class="fieldset">
+                    <legend class="legend">
+                        Respuesta
+                    </legend>
+                        <select type="list" list="tatendido" class="input-select" name="atendido" id="atendido"
+                            required>
+                            <datalist id="tatendido">
+                                <option selected disabled value="">ESTADO</option>
+                                <option value="Atendido">Atendido</option>
+                                <option value="Derivado">Derivado</option>
+                                <option value="Pendiente">Pendiente</option>
+                            </datalist>
+                        </select>
+
+                        <textarea class="input-text" name="respuesta" rows="2" id="respuesta" required></textarea>
+                        <input type="submit" class="input-text sendf" value="Registrar" id="registerForm" disabled>
+                </fieldset>
+
+            </section>
+            <section class="first-section">
+
+
+                <fieldset class="fieldset" id="vCalidad" style="display:none;">
+                    <legend class="legend">
+                        Encuesta de Satisfacción
+                    </legend>
+
+                    <div class="content-campos">
+
+                        <div class="content-quality">
+                            <label class="clabel" for="cuestiono">¿Ha quedado usted satisfecho con el trato del
+                                personal de orientación que lo atendió a través de la Línea Social 101?</label>
+
+                            <select type="list" list="tcuestiono" class="input-select" name="cuestiono" id="cuestiono">
+                                <datalist id="tcuestiono">
+                                    <option selected value="">OPTION</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </datalist>
+                            </select>
+
+                        </div>
+                        <div class="content-quality">
+
+                            <label class="clabel" for="cuestiont">¿Qué tan satisfecho queda usted con la
+                                claridad de la información que le brindaron a través de la Línea Social
+                                101?</label>
+                            <select type="list" list="tcuestiont" class="input-select" name="cuestiont" id="cuestiont">
+                                <datalist id="tcuestiont">
+                                    <option selected value="">OPTION</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </datalist>
+                            </select>
+
+                        </div>
+                        <div class="content-quality">
+
+                            <label class="clabel" for="autorizacion">Autorización de llamada</label>
+                            <select type="list" list="tautorizacion" class="input-select" name="autorizacion"
+                                id="autorizacion">
+                                <datalist id="tautorizacion">
+                                    <option selected value="">OPTION</option>
+                                    <option value="Si">Si</option>
+                                    <option value="No">No</option>
+                                </datalist>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+            </section>
+
+        </form>
+    </main>
+    <footer class="footer">
+      <p class="titleend">Oficina de Atención al Ciudadano y Gestión Documental</p>
+      <a class="href" href="https://api.whatsapp.com/send?phone=51982067675&text=Hola,%20deseo%20informaci%C3%B3n%20sobre%20el%20formulario..." target="_blank">Información</a>
+
+    </footer>
+
+    <?!= include('JS');?>
+</body>
+
+</html>
